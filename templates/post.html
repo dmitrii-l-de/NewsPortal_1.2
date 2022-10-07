@@ -1,0 +1,49 @@
+{% extends 'default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+Post
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим сам товар, идентификатор которого был передан в url -->
+{% block content %}
+<h1>Свежая новость от {{ post_detail.pub_date | date:'d M Y' }}</h1>
+    <hr>
+       {% if post_detail %}
+            <table class="table table-hover">
+      <thead>
+        <tr class="table-dark">
+
+          <td>Заголовок</td>
+          <td>Дата публикации</td>
+          <td>Текст статьи</td>
+        </tr>
+       <tr>
+           <td>{{ post_detail.title | censor }}</td>
+           <td>{{ post_detail.pub_date | date:'d M Y' }}</td>
+           <td>{{ post_detail.article | censor }}</td>
+       </tr>
+           <td>
+                   <form>
+                   {% for cat in post_detail.category.all %}
+                       {% csrf_token %}
+                       <button type="button" class="btn btn-dark">
+                       <a class="nav-link" href="/subscribe_me/?query={{post_detail.pk}}">Подписаться на {{cat}}</a>
+                       </button>
+                       <br />
+                   {% endfor %}
+                   </form>
+               </td>
+
+       </table>
+                <button type="button" class="btn btn-dark">
+               <a class="nav-link" href="update/">Внести изменения в статью/новость</a>
+               </button>
+                <button type="button" class="btn btn-dark">
+               <a class="nav-link" href="delete/">Удалить статью/новость</a>
+               </button>
+   {% else %}
+       <h2>К сожалению больше новостей нет!</h2>
+   {% endif %}
+{% endblock content %}

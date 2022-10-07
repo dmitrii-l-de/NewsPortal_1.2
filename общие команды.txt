@@ -1,0 +1,138 @@
+1. Запуск проекта Django:
+django-admin startproject news
+2. Перемещаемся в директорию где находится файд manage.py
+cd news
+Запускаем сервер:
+python manage.py runserver
+3. Для исправления появившихся ошибок в консоли, необходимо применить миграции.
+Пишем: python manage.py migrate
+3. Создаем суперюзера (административный доступ) задав логин и пароль:
+python manage.py createsuperuser
+4. Создаем приложение
+python manage.py startapp project
+Появляется новая папка.
+Каждое прил-е которое будем создавать будет иметь 3 общие характеристики:
+ссылки, подключение к бд и отображение на сайте.
+5. Связываем прил-е и вебсайт.
+Заходим в корневую папку где лежат прилки, папка settings.py =>
+INSTALLED_APPS и в кавычках дописываем название своего приложения
+(здесь 'project')
+6. Инициализируем пустой репозиторий git init
+7. Добавляем в gitignore файл __pycache__ командой:
+echo "*__pycache__" > .gitignore
+8. Добавляем файл в котором будет описание проекта:
+echo "Проект новостной портал" > README.md
+9. Все зависимости добавляемые к проекту сохраняем в файле requirements:
+echo "django-filter==22.1" > requirements.txt
+При клонировании репозитория на хостинг или на удаленный сервер,
+мы можем установить все зависимости командой:
+pip install -r requirements.txt
+10. Сразу создаем папки templates для шаблонов и static для стилей/картинок и тд:
+mkdir templates
+mkdir static
+11. В settings.py импортируем модуль os для работы с путями:
+import os
+12. Там же в папке с шаблонами TEMPLATES добавляем путь к шаблонамЖ
+'DIRS': [os.path.join(BASE_DIR, 'templates')]
+13. Для поиска статических файлов, внизу файла settings.py добавляем переменную:
+STATICFILES_DIRS = [
+    BASE_DIR / "static"
+]
+14. Для установки стилей и скриптов, в папку static копируем скаченный и
+распакованный файл с сайта bootstrap.com
+15. В эту же папку сохраняем файл jquery скачаный с одноименного сайта
+16. Создаем базовый шаблон с внесенными стилями base/default.html
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+        <title>Главная</title>
+    <linc href="{% static static 'bootstrap-5.2.2-dist/css/bootstrap.min.css' %}" rel="stylesheet" />
+</head>
+    <body>
+        Привет Джанго
+
+        <script src="{% static 'jquery-3.6.1.min.js' %}"></script>
+        <script src="{% static 'bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js' %}" ></script>
+    </body>
+</html>
+17. В папке views  нашего приложения project создаем представление BaseView
+наследуя его от дженерика TemplateView:
+from django.views.generic import TemplateView
+class BaseView(TemplateView):
+    template_name = 'default.html'
+18. Добавляем путь к шаблону в папке проекта news -> urls.py
+Импортируем то представление которое создали:
+from project.views import BaseView
+Добавляем путь к шаблону:
+path('', BaseView.as_view())
+19. Добавляем навигационную панель на сайт: копируем код нужной панели на сайте
+bootswatch и вставляем под открывающимся тегом body в нашем базовом шаблоне
+20. Для изменения стиля страницы: static.bootstrap/css удаляем
+файл bootstrap.min.css и вставляем вместо него такой же файл скачанный на сайте
+bootstrap.com на странице с необходимой темой
+21. Для того чтобы не хранить секретные данные в файлах программы, их необходимо
+скрыть. Устанавливаем необходимую библиотеку:
+pip install python-dotenv
+в корневой папке создаем секретный файл
+.env
+добавляем его в gitignore
+импортируем в файл settings dotenv:
+from dotenv import load_dotenv
+load_dotenv()
+Теперь мы можем создавать переменные с секретными данными в файле .env
+Например: DJ_SECRET_KEY = 'какие-то данные'
+и объявлять их в settings с помощью пути:
+SECRET_KEY = os.getenv('DJ_SECRET_KEY')
+22. Добавляем необходимые модели в models.py
+23. В файле admin.py регистрируем модели для добавления в админ панеле
+from django.contrib import admin
+from .models import Author, Post, Category, CategoryUser, Comment, PostCategory
+admin.site.register(Author)
+admin.site.register(Post)
+admin.site.register(Category)
+admin.site.register(CategoryUser)
+admin.site.register(Comment)
+admin.site.register(PostCategory)
+24. Делаем миграцию, чтобы все модели/таблицы отображались в админ пенеле
+Теперь мы можем их редактировать там.
+25. Создаем вьюхи(для примера просмотр всех новостей):
+class PostList(ListView):
+    # Указываем модель, объекты которой мы будем выводить
+    model = Post
+    # Поле, которое будет использоваться для сортировки объектов
+    # сортировка по дате публикации
+    ordering = '-pub_date'
+    # queryset = Post.objects.order_by('-pub_date')
+    # также можно использовать сортировку queryset чтобы вывод был по условию:
+    # queryset = Post.objects.filter(price__lt = 300).order_by('name') или
+    # queryset = Post.objects.order_by('-name') в обратном направлении
+    # Указываем имя шаблона, в котором будут все инструкции о том,
+    # как именно пользователю должны быть показаны наши объекты
+    template_name = 'posts.html'
+    # Это имя списка, в котором будут лежать все объекты.
+    # Его надо указать, чтобы обратиться к списку объектов в html-шаблоне.
+    context_object_name = 'posts_list'
+    # количество отображаемых объектов
+    paginate_by = 8
+26. Создаем posts.html шаблон в папке templates
+и привязываем его к базовому default.html:
+{% extends 'default.html' %}
+{% block title %}
+Post
+{% endblock title %}
+{% block content %}
+<h1>Все новости</h1>
+{{ posts_list }}
+{% endblock content %}
+
+27. В главном шаблоне добавляем теги для вывода блоков дочерних шаблонов
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+{% endblock content %}
+28. Переходим в корневой файл urls.py и добавляем путь к созданному
+шаблону/странице, предварительно также как и раньше импортировав созданную вьюху:
+path('posts/', PostList.as_view())
+29.
