@@ -74,3 +74,26 @@ def send_delete_mail(sender, instance, **kwargs) -> None:
         from_email='gbicfo@yandex.ru',
         recipient_list=[admin.email],
     )
+
+
+# Здесь реализована рассылка приветственного письма зарегиным пользователям
+# @receiver(post_save, sender=User)
+# def new_user_appointment(sender, instance, created, **kwargs):
+#     print('Test')
+#     print(instance)
+#     user = User.objects.get(username=instance.username)
+#     print(user)
+#     print(user.email)
+#
+#     html = render_to_string(
+#         'email_confirmation_signup_message.html ')
+#
+#     msg = EmailMultiAlternatives(
+#         subject=f'Уважаемый {user}, добро пожаловать!',
+#         from_email='gbicfo@yandex.ru',
+#         to=['dmitriy_leznev@mail.ru', user.email],  # отправка необходимым людям
+#     )
+#     msg.attach_alternative(html, 'text/html')
+#     msg.send()
+#     print('Сообщение отправлено')
+#     return redirect('posts_list')

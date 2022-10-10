@@ -1,7 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMultiAlternatives
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.models import Group, User
@@ -190,4 +193,24 @@ def subscribe_me(request):
     # создаем объект модели CategoryUser присваивая данные из запроса
     CategoryUser.objects.create(user_id=request.user.pk, category_id=needed_cat_id)
     # после создания перенаправляем на главную
+    return redirect('posts_list')
+
+
+# Здесь реализована рассылка приветственного письма зарегиным пользователям
+@receiver(post_save, sender=User)
+def new_user_appointment(sender, instance, created, **kwargs):
+    print('Test')
+    print(instance)
+    user = User.objects.get(username=instance.username)
+    print(user)
+    print(user.email)
+
+    send_mail(
+        'Добро пожаловать на наш портал!',
+        f'Приветствуем тебя, {user}',
+        'gbicfo@yandex.ru',
+        [user.email],
+        fail_silently=False,
+    )
+    print('Сообщение отправлено')
     return redirect('posts_list')

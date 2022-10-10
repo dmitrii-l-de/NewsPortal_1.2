@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     # ... include the providers you want to enable:
     'allauth.socialaccount.providers.google',
+    'django_apscheduler',
 
     'django.contrib.sites',
     'django.contrib.admin',
@@ -68,7 +69,8 @@ ROOT_URLCONF = 'news.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        # 'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -164,14 +166,34 @@ ACCOUNT_EMAIL_VERIFICATION = 'none' # указываем, что верифик�
 # по умолчанию, необходимо добавить строчку
 ACCOUNT_FORMS = {'signup': 'project.forms.CommonSignupForm'}
 
-# Реализация отправки писем
-EMAIL_HOST = 'smtp.yandex.ru'  # адрес сервера Яндекс-почты для всех один                             # и тот же
-EMAIL_PORT = 465  # порт smtp сервера тоже одинаковый
-EMAIL_HOST_USER = 'gbicfo'  # ваше имя пользователя, например, если ваша почта
-# user@yandex.ru, то сюда надо писать user, иными словами, это всё то
-# что идёт до собаки
-EMAIL_HOST_PASSWORD = '220489Dima'  # пароль от почты
-EMAIL_USE_SSL = True  # Яндекс использует ssl, подробнее о том, что это,
-# почитайте в дополнительных источниках, но включать его здесь обязательно
+# Реализация отправки писем через яндекс smtp
+# EMAIL_HOST = 'smtp.yandex.ru'  # адрес сервера Яндекс-почты для всех один                             # и тот же
+# EMAIL_PORT = 465  # порт smtp сервера тоже одинаковый
+# EMAIL_HOST_USER = 'gbicfo'  # ваше имя пользователя, например, если ваша почта
+# # user@yandex.ru, то сюда надо писать user, иными словами, это всё то
+# # что идёт до собаки
+# EMAIL_HOST_PASSWORD = '220489Dima'  # пароль от почты
+# EMAIL_USE_SSL = True  # Яндекс использует ssl, подробнее о том, что это,
+# # почитайте в дополнительных источниках, но включать его здесь обязательно
+# Реализация отправки писем. То же самое что и smtp только здесь на дебаг платформе
+EMAIL_HOST = "app.debugmail.io"
+EMAIL_HOST_USER = "5e484f7a-7b90-4887-9b58-e237077e4352"
+EMAIL_HOST_PASSWORD = "b9418f07-2c1b-49ef-b70b-ac3d8d7092c0"
+EMAIL_PORT = "25"
+DEFAULT_MAIL_SENDER = EMAIL_HOST_USER + 'gbicfo@yandex.ru'
 
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER + '@yandex.ru'
+# Format string for displaying run time timestamps in the Django admin site. The default
+# just adds seconds to the standard Django format, which is useful for displaying the timestamps
+# for jobs that are scheduled to run on intervals of less than one minute.
+#
+# See https://docs.djangoproject.com/en/dev/ref/settings/#datetime-format for format string
+# syntax details.
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
+
+# Maximum run time allowed for jobs that are triggered manually via the Django admin site, which
+# prevents admin site HTTP requests from timing out.
+#
+# Longer running jobs should probably be handed over to a background task processing library
+# that supports multiple background worker processes instead (e.g. Dramatiq, Celery, Django-RQ,
+# etc. See: https://djangopackages.org/grids/g/workers-queues-tasks/ for popular options).
+APSCHEDULER_RUN_NOW_TIMEOUT = 25  # Seconds
