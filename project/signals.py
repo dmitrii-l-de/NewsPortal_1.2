@@ -11,6 +11,8 @@ from .models import Post, PostCategory, User, CategoryUser
 
 
 @receiver(post_init, sender=PostCategory)
+# Здесь реализована отправка письма юзеру подписанному на определенную категорию, при создании
+# поста в этой категории
 def save_new_post(sender, instance, *args, **kwargs):
    post = instance
    print('TEST')

@@ -64,6 +64,26 @@ class PostDetail(DetailView):
     # Название объекта, в котором будет выбранный пользователем продукт
     context_object_name = 'post_detail'
 
+    # Здесь реализовано, может ли пользователь подписаться на категорию
+    # если он не подписан на категорию, то кнопка кликабельна, если уже подписан, то нет
+    def get_context_data(self, **kwargs,):
+        context = super().get_context_data(**kwargs)
+        context_post = kwargs['object']
+        print(context_post)
+        context_PostCategory = (PostCategory.objects.filter(post_id=context_post.id))[0]
+        list_categoryuser = CategoryUser.objects.all()
+        if len(list_categoryuser) == 0:
+            context['is_not_subscribe'] = True
+        for next_categoryuser in list_categoryuser:
+            if next_categoryuser.user_id == self.request.user.id and\
+                    next_categoryuser.category_id == context_PostCategory.category_id:
+                context['is_not_subscribe'] = False
+                break
+            else:
+                context['is_not_subscribe'] = True
+        return context
+
+
 
 class NewsSearch(ListView):
     model = Post
@@ -182,6 +202,11 @@ def sending_me(request):
 @login_required
 # здесь реализована подписка на категорию новостей на странице новости
 def subscribe_me(request):
+    user = request.user.pk
+    print(user)
+    # Все категории на которые подписан юзер
+    us_cats = CategoryUser.objects.filter(user_id=user).values('category_id')
+    print(us_cats)
     get_obj = request.GET # получаем данные из запраса
     print(get_obj)
     get_obj_pk = int(get_obj['query']) # инициализируем эти данные
@@ -191,6 +216,7 @@ def subscribe_me(request):
                      values('category_id'))[0]['category_id']
     print(needed_cat_id)
     # создаем объект модели CategoryUser присваивая данные из запроса
+
     CategoryUser.objects.create(user_id=request.user.pk, category_id=needed_cat_id)
     # после создания перенаправляем на главную
     return redirect('posts_list')

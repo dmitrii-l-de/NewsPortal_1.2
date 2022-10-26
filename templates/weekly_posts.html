@@ -9,7 +9,7 @@
 
 <body>
     <h2>Привет {{ user.username }}!</h2>
-    <p>Новые публикации за неделю в категории {{ category.category }} на которую вы подписаны!</p>
+    <p>Новые публикации за неделю в категории {{ category.category_name }} на которую вы подписаны!</p>
     <dl>
         {% for post in post %}
         <dt><a href="http://127.0.0.1:8000{% url 'post_detail' post.id %}">{{ post.title }}</a></dt>

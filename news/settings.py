@@ -172,7 +172,7 @@ ACCOUNT_FORMS = {'signup': 'project.forms.CommonSignupForm'}
 # EMAIL_HOST_USER = 'gbicfo'  # ваше имя пользователя, например, если ваша почта
 # # user@yandex.ru, то сюда надо писать user, иными словами, это всё то
 # # что идёт до собаки
-# EMAIL_HOST_PASSWORD = '220489Dima'  # пароль от почты
+# EMAIL_HOST_PASSWORD = MY_EMAIL_HOST_PASSWORD  # пароль от почты
 # EMAIL_USE_SSL = True  # Яндекс использует ssl, подробнее о том, что это,
 # # почитайте в дополнительных источниках, но включать его здесь обязательно
 # Реализация отправки писем. То же самое что и smtp только здесь на дебаг платформе

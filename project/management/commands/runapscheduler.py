@@ -16,6 +16,8 @@ logger = logging.getLogger(__name__)
 
 
 def send_weekly_mail(post, category) -> None:
+    # Реализация переодической еженедельной рассылки всех новостей из категорий на которые
+    # подписан пользователь
     # собираем аудиторию подписчиков
     for user in category.subscribers.all():
         if user.email == "" or user.email is None:
@@ -44,7 +46,7 @@ def my_job():
     # задача по еженедельной рассылке
     for category in Category.objects.all():
         # собираем все посты в промежутке недели
-        posts = category.post_set.filter(pub_date__gte=datetime.now() - timedelta(minutes=3600))
+        posts = category.post_set.filter(pub_date__gte=datetime.now() - timedelta(minutes=604800))
         if posts.count() != 0:
             send_weekly_mail(posts, category)
     print("job done")
@@ -71,7 +73,7 @@ class Command(BaseCommand):
         # добавляем работу нашему задачнику
         scheduler.add_job(
             my_job,
-            trigger=CronTrigger(second="*/10"),
+            trigger=CronTrigger(second="*/10"), # здесь выставляем время повторения задачи
             # То же, что и интервал, но задача тригера таким образом более понятна django
             id="my_job",  # уникальный айди
             max_instances=1,
@@ -84,7 +86,8 @@ class Command(BaseCommand):
         #     trigger=CronTrigger(
         #         day_of_week="mon", hour="00", minute="00"
         #     ),
-        #     # Каждую неделю будут удаляться старые задачи, которые либо не удалось выполнить, либо уже выполнять не надо.
+        #     # Каждую неделю будут удаляться старые задачи, которые либо не удалось
+        #     выполнить, либо уже выполнять не надо.
         #     id="delete_old_job_executions",
         #     max_instances=1,
         #     replace_existing=True,

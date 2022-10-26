@@ -28,11 +28,18 @@ Post
                    <form>
                    {% for cat in post_detail.category.all %}
                        {% csrf_token %}
+                       {% if is_not_subscribe %}
                        <button type="button" class="btn btn-dark">
                        <a class="nav-link" href="/subscribe_me/?query={{post_detail.pk}}">Подписаться на {{cat}}</a>
                        </button>
+                       {% endif %}
+                       {% if not is_not_subscribe %}
+                             <a>{{cat}}</a>
+                       {% endif %}
+
+                       {% endfor %}
                        <br />
-                   {% endfor %}
+
                    </form>
                </td>
 
