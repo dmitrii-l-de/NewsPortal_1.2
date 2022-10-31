@@ -4,9 +4,16 @@
 
 {% load custom_filters %}
 
+{% load cache %}
+{% cache 5 title %}
+
 {% block title %}
 Post
 {% endblock title %}
+{% endcache %}
+
+{% cache 5 title %}
+
 {% block content %}
     <h1>Свежих новостей: {{ posts_list|length }} </h1>
     <h6>Поиск статьи</h6>
@@ -61,3 +68,5 @@ Post
         {% endif %}
     {% endif %}
 {% endblock content %}
+
+{% endcache %}

@@ -12,6 +12,7 @@ from django.contrib.auth.models import Group, User
 from .forms import PostForm, UserForm
 from .models import Post, Author, PostCategory, CategoryUser
 from .filters import PostFilter
+from django.core.cache import cache # импортируем наш кэш
 
 
 class BaseView(TemplateView):
@@ -83,6 +84,20 @@ class PostDetail(DetailView):
                 context['is_not_subscribe'] = True
         return context
 
+    queryset = Post.objects.all()
+
+    def get_object(self, *args, **kwargs):  # переопределяем метод получения объекта,
+        # как ни странно
+        obj = cache.get(f'post_detail-{self.kwargs["pk"]}',None)  # кэш очень похож на
+        # словарь, и метод get действует так же. Он забирает значение по ключу,
+        # если его нет, то забирает None.
+
+        # если объекта нет в кэше, то получаем его и записываем в кэш
+        if not obj:
+            obj = super().get_object(queryset=self.queryset)
+            cache.set(f'post_detail-{self.kwargs["pk"]}', obj)
+
+        return obj
 
 
 class NewsSearch(ListView):
@@ -119,7 +134,6 @@ class NewsCreate(PermissionRequiredMixin, CreateView):
 
 
 class ArticlesCreate(PermissionRequiredMixin, CreateView):
-    # login_url = '/accounts/login/'
     form_class = PostForm
     model = Post
     permission_required = ('project.add_post',)
@@ -133,7 +147,6 @@ class ArticlesCreate(PermissionRequiredMixin, CreateView):
 
 
 class PostUpdate(PermissionRequiredMixin, UpdateView):
-    # login_url = '/accounts/login/'
     form_class = PostForm
     model = Post
     permission_required = ('project.change_post',)
@@ -141,7 +154,6 @@ class PostUpdate(PermissionRequiredMixin, UpdateView):
 
 
 class PostDelete(PermissionRequiredMixin, DeleteView):
-    # login_url = '/accounts/login/'
     model = Post
     permission_required = ('project.delete_post',)
     template_name = 'post_delete.html'

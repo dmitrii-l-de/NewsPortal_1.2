@@ -177,8 +177,8 @@ ACCOUNT_FORMS = {'signup': 'project.forms.CommonSignupForm'}
 # # почитайте в дополнительных источниках, но включать его здесь обязательно
 # Реализация отправки писем. То же самое что и smtp только здесь на дебаг платформе
 EMAIL_HOST = "app.debugmail.io"
-EMAIL_HOST_USER = "5e484f7a-7b90-4887-9b58-e237077e4352"
-EMAIL_HOST_PASSWORD = "b9418f07-2c1b-49ef-b70b-ac3d8d7092c0"
+EMAIL_HOST_USER = "ed143811-3a8e-47db-bb51-2fd9eabd1a34"
+EMAIL_HOST_PASSWORD = "3ca9d4d0-c913-425a-bb4f-dab693596a12"
 EMAIL_PORT = "25"
 DEFAULT_MAIL_SENDER = EMAIL_HOST_USER + 'gbicfo@yandex.ru'
 
@@ -197,3 +197,25 @@ APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
 # that supports multiple background worker processes instead (e.g. Dramatiq, Celery, Django-RQ,
 # etc. See: https://djangopackages.org/grids/g/workers-queues-tasks/ for popular options).
 APSCHEDULER_RUN_NOW_TIMEOUT = 25  # Seconds
+
+
+# CELERY_IMPORTS = ("tasks")
+CELERY_BROKER_URL = 'redis://localhost:6379'
+# указывает на URL брокера сообщений (Redis). По умолчанию он находится на порту 6379.
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+# указывает на хранилище результатов выполнения задач
+CELERY_ACCEPT_CONTENT = ['application/json']
+# допустимый формат данных
+CELERY_TASK_SERIALIZER = 'json'
+# метод сериализации задач
+CELERY_RESULT_SERIALIZER = 'json'
+# метод сериализации результатов
+
+
+CACHES = {
+    'default': {
+        'TIMEOUT': 60, # добавляем стандартное время ожидания в минуту (по умолчанию это 5 минут — 300 секунд)
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, 'cache_files'), # Указываем, куда будем сохранять кэшируемые файлы! Не забываем создать папку cache_files внутри папки с manage.py!
+    }
+}
