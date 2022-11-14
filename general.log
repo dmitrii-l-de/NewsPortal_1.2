@@ -1,0 +1,2 @@
+2022-11-14 14:57:06,326 INFO autoreload Watching for file changes with StatReloader
+2022-11-14 14:57:58,594 INFO autoreload /Users/dima/Downloads/PyCharm projects/NewsPaper1/news/news/settings.py changed, reloading.

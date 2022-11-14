@@ -51,8 +51,8 @@ class CategoryUser(models.Model):
     Промежуточная модель связывающая юзеров и категории новостей/пост
     на которые они подписаны. 1 юзер может быть подписан на несколько категорий
     '''
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, verbose_name='Категория подписки', on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.user}, {self.category}'
@@ -79,7 +79,7 @@ class Post(models.Model):
     ]
     author = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name='Автор поста')
     choice_field = models.CharField(max_length=1, choices=CHOICES, default=news)
-    pub_date = models.DateTimeField(auto_now_add=True)
+    pub_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
     title = models.CharField(max_length=255, verbose_name='Заголовок поста')
     article = models.TextField(verbose_name='Текст поста')
     post_rating = models.IntegerField(default=0, db_column='post_rating', verbose_name='Рейтинг поста')

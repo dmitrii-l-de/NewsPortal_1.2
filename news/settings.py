@@ -12,8 +12,11 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+
 from dotenv import load_dotenv
 load_dotenv()
+
+import logging
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,6 +30,148 @@ SECRET_KEY = os.getenv('DJ_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+
+def log_filter_debug_info(rec: logging.LogRecord):
+    return (rec.levelname == 'DEBUG') or (rec.levelname == 'INFO')
+
+
+def log_filter_warning(rec: logging.LogRecord):
+    return rec.levelname == 'WARNING'
+
+
+def log_filter_error_critical(rec: logging.LogRecord):
+    return (rec.levelname == 'ERROR') or (rec.levelname == 'CRITICAL')
+
+# ниже реализовано логирование
+LOGGING = {
+    # version всегда определяется как 1, на текущий момент это единственно допустимое значение
+    'version': 1,
+    # disable_existing_loggers контролирует работу существующей (стандартной) схемы
+    # логирования Django
+    'disable_existing_loggers': False,
+    # В ключе formatters определен достаточно простой формат записи сообщений.
+    'formatters': {
+        'debug': {
+            'format': '{asctime} {levelname} {message}',
+            'style': '{',
+        },
+        'warning': {
+            'format': '{asctime} {levelname} {pathname} {message}',
+            'style': '{',
+        },
+        'critical': {
+            'format': '{asctime} {levelname} {pathname} {message} {exc_info}',
+            'style': '{',
+        },
+        'to_file_general': {
+            'format': '{asctime} {levelname} {module} {message}',
+            'style': '{',
+        },
+    },
+    'filters': {
+        # определен фильтр, который пропускает записи только в случае, когда DEBUG = True
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+        # определен фильтр, который пропускает записи только в случае, когда DEBUG = False
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'debug_info': {
+            '()': 'django.utils.log.CallbackFilter',
+            'callback': log_filter_debug_info,
+        },
+        'warning': {
+            '()': 'django.utils.log.CallbackFilter',
+            'callback': log_filter_warning,
+        },
+        'error_critical': {
+            '()': 'django.utils.log.CallbackFilter',
+            'callback': log_filter_error_critical,
+        },
+    },
+    'handlers': {
+        # В ключе handlers можно обнаружить обработчики.
+        # Первый обработчик передает сообщения уровня DEBUG в консоль. Кроме того,
+        # накладывается фильтр, определенный выше require_debug_true
+        'console_debug': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true', 'debug_info'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'debug',
+        },
+        'console_warning': {
+            'level': 'WARNING',
+            'filters': ['require_debug_true', 'warning'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'warning',
+        },
+        'console_critical': {
+            'level': 'ERROR',
+            'filters': ['require_debug_true', 'error_critical'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'critical',
+        },
+        'file_general': {
+            'level': 'INFO',
+            'filters': ['require_debug_false'],
+            'class': 'logging.FileHandler',
+            'formatter': 'to_file_general',
+            'filename': 'general.log'
+        },
+        'file_errors': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'formatter': 'critical',
+            'filename': 'errors.log'
+        },
+        'file_security': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'formatter': 'to_file_general',
+            'filename': 'security.log'
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'formatter': 'warning',
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console_debug', 'console_warning',
+                         'console_critical', 'file_general'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['file_errors', 'mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'django.server': {
+            'handlers': ['file_errors', 'mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'django.template': {
+            'handlers': ['file_errors'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'django.db_backends': {
+            'handlers': ['file_errors'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'django.security': {
+            'handlers': ['file_security'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    }
+}
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
