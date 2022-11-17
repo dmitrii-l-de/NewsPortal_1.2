@@ -1,25 +1,27 @@
 {% extends 'default.html' %}
-
+{% load i18n %}
 
 {% block title %}
-Посты отфильтрованные
+{% trans 'Filtered' %}
 {% endblock title %}
 
 {% block content %}
-    <h1>Отфильтрованные сообщения</h1>
+
+
+    <h1>{% trans 'Filtered messages' %}</h1>
     <hr>
     {# Добавляем форму, которая объединяет набор полей, которые будут отправляться в запросе #}
     <form action="" method="get">
         {{ filterset.form.as_p }}
-        <input type="submit" value="Найти" />
+        <input type="submit" value="{% trans 'Search' %}" />
     </form>
     <hr>
     {% if newssearch %}
         <table>
             <tr>
-                <td><h4>Заголовок поста</h4></td>
-                <td><h4>Дата поста</h4></td>
-                <td><h4>Текст поста</h4></td>
+                <td><h4>{% trans 'Title' %}</h4></td>
+                <td><h4>{% trans 'Publication date' %}</h4></td>
+                <td><h4>{% trans 'Text' %}</h4></td>
             </tr>
 
             {% for news in newssearch %}
@@ -32,7 +34,7 @@
 
         </table>
     {% else %}
-        <h2>Сообщений нет!</h2>!
+        <h2>{% trans 'No messages!' %}/h2>!
     {% endif %}
 
 {% endblock content %}

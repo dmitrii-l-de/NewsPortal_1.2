@@ -1,11 +1,15 @@
 {% extends 'default.html' %}
 
+{% load i18n %}
+
 {% block content %}
-<h1>Создать пост</h1>
+
+
+<h1>{% trans 'Create new Post' %}</h1>
 <hr>
 <form action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Сохранить" />
+    <input type="submit" value="{% trans 'Save' %}" />
 </form>
 {% endblock content %}

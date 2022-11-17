@@ -23,7 +23,7 @@ class PostForm(forms.ModelForm):
 
         if title == text:
             raise ValidationError(
-                "Заголовок не должно быть идентичен тексту статьи."
+                "The title should not be identical to the text of the article"
             )
         return cleaned_data
 

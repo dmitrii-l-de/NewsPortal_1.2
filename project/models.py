@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.core.cache import cache
+from django.utils.translation import gettext_lazy as _ # импортируем функцию для перевода
 
 
 class Author(models.Model):
@@ -9,8 +10,8 @@ class Author(models.Model):
     Модель содержащая объекты всех авторов. Поле user имеет связь 1к1 с
     моделью User и поле author_rating отражает общий рейтинг автора
     '''
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
-    user_rating = models.IntegerField(default=0, verbose_name='Рейтинг')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_('Author'))
+    user_rating = models.IntegerField(default=0, verbose_name='Rating')
     '''
     Метод update_rating() модели Author, который обновляет рейтинг 
     пользователя, переданный в аргумент этого метода.
@@ -51,8 +52,8 @@ class CategoryUser(models.Model):
     Промежуточная модель связывающая юзеров и категории новостей/пост
     на которые они подписаны. 1 юзер может быть подписан на несколько категорий
     '''
-    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, verbose_name='Категория подписки', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, verbose_name='User', on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, verbose_name='Subscription сategory', on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.user}, {self.category}'
@@ -74,16 +75,16 @@ class Post(models.Model):
     post = 'P'
     news = 'N'
     CHOICES = [
-        (news, 'Новости'),
-        (post, 'Посты')
+        (news, 'News'),
+        (post, 'Post')
     ]
-    author = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name='Автор поста')
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name='Post Author')
     choice_field = models.CharField(max_length=1, choices=CHOICES, default=news)
-    pub_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
-    title = models.CharField(max_length=255, verbose_name='Заголовок поста')
-    article = models.TextField(verbose_name='Текст поста')
-    post_rating = models.IntegerField(default=0, db_column='post_rating', verbose_name='Рейтинг поста')
-    category = models.ManyToManyField(Category, through='PostCategory', verbose_name='Категория ')
+    pub_date = models.DateTimeField(auto_now_add=True, verbose_name=_('Publication date'))
+    title = models.CharField(max_length=255, verbose_name=_('Post title'))
+    article = models.TextField(verbose_name=_('Post text'))
+    post_rating = models.IntegerField(default=0, db_column='post_rating', verbose_name='Post rating')
+    category = models.ManyToManyField(Category, through='PostCategory', verbose_name=_('Category'))
     '''
     Метод preview() модели Post, который возвращает начало статьи 
     (предварительный просмотр) длиной 124 символа и добавляет многоточие в 
@@ -101,8 +102,8 @@ class Post(models.Model):
         self.save()
 
     def __str__(self):
-        return f'Заголовок: {self.title.title()}, Дата публикации: ' \
-               f'{self.pub_date}: Текст статьи: {self.article}'
+        return f'Post title: {self.title.title()}, Publication date: ' \
+               f'{self.pub_date}: Post text: {self.article}'
 
     def get_absolute_url(self):
         return reverse('post_detail', args=[str(self.id)])
@@ -120,7 +121,7 @@ class PostCategory(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'Статья: {self.post}\nКатегория: {self.category}'
+        return f'Post: {self.post}\nCategory: {self.category}'
 
 
 class Comment(models.Model):

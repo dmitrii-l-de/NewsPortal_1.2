@@ -1,35 +1,37 @@
 {% extends 'default.html' %}
-
+{% load i18n %}
 {% block title %}
 {{ flatpage.title }}
 {% endblock title %}
 
 {% block content %}
-<h2>Страница авторизованного пользователя {{request.user.username}}</h2>
-<div> Здесь может содержаться персональная информация для каждого пользователя </div>
 
-<p>Ник: {{request.user.username}}</p>
 
-<p>Email: {{request.user.email}}</p>
+<h2>{% trans 'Authorized User Page' %} {{request.user.username}}</h2>
+<div> {% trans 'This may contain personal information for each user' %} </div>
 
-<p>Имя: {{request.user.first_name}}</p>
+<p>{% trans 'Nickname' %}: {{request.user.username}}</p>
 
-<p>Фамилия: {{request.user.last_name}}</p>
+<p>{% trans 'Email' %}: {{request.user.email}}</p>
 
-<p>Дата регистрации: {{request.user.date_joined}}</p>
+<p>{% trans 'First name' %}: {{request.user.first_name}}</p>
 
-<p>Время последней авторизации: {{request.user.last_login}}</p>
+<p>{% trans 'Last name' %}: {{request.user.last_name}}</p>
+
+<p>{% trans 'Publication date' %}: {{request.user.date_joined}}</p>
+
+<p>{% trans 'Time of last authorization' %}: {{request.user.last_login}}</p>
 
 <p>id: {{request.user.pk}}</p>
 <p></p>
 {% if is_not_premium %}
 <button type="button" class="btn btn-dark">
-               <a class="nav-link" href="upgrade/">Стать автором!</a> </button>
+               <a class="nav-link" href="upgrade/">{% trans 'Become an author' %}!</a> </button>
 {% endif %}
 <button type="button" class="btn btn-dark">
-               <a class="nav-link" href="/user_update/{{ user.pk }}/"> Редактировать профиль</a> </button>
+               <a class="nav-link" href="/user_update/{{ user.pk }}/"> {% trans 'Edit profile' %}</a> </button>
 <button type="button" class="btn btn-dark">
-               <a class="nav-link" href="sending_me/?q={{ user.username }}&email={{ user.email }}"> Отправить письмо в поддержку</a> </button>
+               <a class="nav-link" href="sending_me/?q={{ user.username }}&email={{ user.email }}">{% trans 'Send email to support' %}</a> </button>
 <button type="button" class="btn btn-dark">
-               <a class="nav-link" href="/accounts/logout/">Выйти</a> </button>
+               <a class="nav-link" href="/accounts/logout/">{% trans 'Exit' %}</a> </button>
 {% endblock content %}

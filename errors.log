@@ -1,0 +1,333 @@
+2022-11-17 10:21:58,833 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/utils/log.py Internal Server Error: /news/ (<class 'django.template.exceptions.TemplateSyntaxError'>, TemplateSyntaxError("Invalid block tag on line 58: 'Text', expected 'elif', 'else' or 'endif'. Did you forget to register or load this tag?"), <traceback object at 0x105196140>)
+Traceback (most recent call last):
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 505, in parse
+    compile_func = self.tags[command]
+KeyError: 'Text'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/backends/django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/templatetags/cache.py", line 84, in do_cache
+    nodelist = parser.parse(("endcache",))
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/defaulttags.py", line 954, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 558, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 58: 'Text', expected 'elif', 'else' or 'endif'. Did you forget to register or load this tag?
+2022-11-17 10:21:58,891 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py "GET /news/ HTTP/1.1" 500 255412 None
+2022-11-17 10:26:44,828 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/utils/log.py Internal Server Error: /news/create/ (<class 'django.template.exceptions.TemplateSyntaxError'>, TemplateSyntaxError("Invalid block tag on line 4: 'trans', expected 'endblock'. Did you forget to register or load this tag?"), <traceback object at 0x1054e28c0>)
+Traceback (most recent call last):
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 505, in parse
+    compile_func = self.tags[command]
+KeyError: 'trans'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/backends/django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 558, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 4: 'trans', expected 'endblock'. Did you forget to register or load this tag?
+2022-11-17 10:26:44,860 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py "GET /news/create/ HTTP/1.1" 500 161344 None
+2022-11-17 11:05:37,807 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/utils/log.py Internal Server Error: /user_update/21/ (<class 'django.template.exceptions.TemplateSyntaxError'>, TemplateSyntaxError("Invalid block tag on line 5: 'trans', expected 'endblock'. Did you forget to register or load this tag?"), <traceback object at 0x10ebb3980>)
+Traceback (most recent call last):
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 505, in parse
+    compile_func = self.tags[command]
+KeyError: 'trans'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/backends/django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/base.py", line 558, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 5: 'trans', expected 'endblock'. Did you forget to register or load this tag?
+2022-11-17 11:05:37,856 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py "GET /user_update/21/ HTTP/1.1" 500 161592 None
+2022-11-17 14:36:10,385 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/utils/log.py Internal Server Error: /news/71/ (<class 'IndexError'>, IndexError('list index out of range'), <traceback object at 0x1034f7100>)
+Traceback (most recent call last):
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 142, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/detail.py", line 109, in get
+    context = self.get_context_data(object=self.object)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/news/project/views.py", line 90, in get_context_data
+    context_PostCategory = (PostCategory.objects.filter(post_id=context_post.id))[0]
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/db/models/query.py", line 446, in __getitem__
+    return qs._result_cache[0]
+IndexError: list index out of range
+2022-11-17 14:36:10,433 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py "GET /news/71/ HTTP/1.1" 500 95250 None
+2022-11-17 14:36:33,903 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/utils/log.py Internal Server Error: /news/71/ (<class 'IndexError'>, IndexError('list index out of range'), <traceback object at 0x103680d80>)
+Traceback (most recent call last):
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 142, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/detail.py", line 109, in get
+    context = self.get_context_data(object=self.object)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/news/project/views.py", line 90, in get_context_data
+    context_PostCategory = (PostCategory.objects.filter(post_id=context_post.id))[0]
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/db/models/query.py", line 446, in __getitem__
+    return qs._result_cache[0]
+IndexError: list index out of range
+2022-11-17 14:36:33,919 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py "GET /news/71/ HTTP/1.1" 500 95250 None
+2022-11-17 14:40:40,166 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/utils/log.py Internal Server Error: /news/72/ (<class 'IndexError'>, IndexError('list index out of range'), <traceback object at 0x1108671c0>)
+Traceback (most recent call last):
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 142, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/detail.py", line 109, in get
+    context = self.get_context_data(object=self.object)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/news/project/views.py", line 90, in get_context_data
+    context_PostCategory = (PostCategory.objects.filter(post_id=context_post.id))[0]
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/db/models/query.py", line 446, in __getitem__
+    return qs._result_cache[0]
+IndexError: list index out of range
+2022-11-17 14:40:40,203 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py "GET /news/72/ HTTP/1.1" 500 98523 None
+2022-11-17 15:12:10,850 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/utils/log.py Internal Server Error: /articles/create/ (<class 'project.models.Author.MultipleObjectsReturned'>, MultipleObjectsReturned('get() returned more than one Author -- it returned 2!'), <traceback object at 0x1114757c0>)
+Traceback (most recent call last):
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/contrib/auth/mixins.py", line 109, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 142, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/edit.py", line 184, in post
+    return super().post(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/edit.py", line 153, in post
+    return self.form_valid(form)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/news/project/views.py", line 160, in form_valid
+    post.author = Author.objects.get(user=self.request.user)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/db/models/query.py", line 653, in get
+    raise self.model.MultipleObjectsReturned(
+project.models.Author.MultipleObjectsReturned: get() returned more than one Author -- it returned 2!
+2022-11-17 15:12:10,913 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py "POST /articles/create/ HTTP/1.1" 500 97212 None
+2022-11-17 15:16:00,491 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/utils/log.py Internal Server Error: /news/71/ (<class 'IndexError'>, IndexError('list index out of range'), <traceback object at 0x110d2d540>)
+Traceback (most recent call last):
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 142, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/detail.py", line 109, in get
+    context = self.get_context_data(object=self.object)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/news/project/views.py", line 89, in get_context_data
+    context_PostCategory = (PostCategory.objects.filter(post_id=context_post.id))[0]
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/db/models/query.py", line 446, in __getitem__
+    return qs._result_cache[0]
+IndexError: list index out of range
+2022-11-17 15:16:00,535 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py "GET /news/71/ HTTP/1.1" 500 105056 None
+2022-11-17 15:17:26,369 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/utils/log.py Internal Server Error: /news/71/ (<class 'IndexError'>, IndexError('list index out of range'), <traceback object at 0x110d2e640>)
+Traceback (most recent call last):
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 142, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/detail.py", line 109, in get
+    context = self.get_context_data(object=self.object)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/news/project/views.py", line 89, in get_context_data
+    context_PostCategory = (PostCategory.objects.filter(post_id=context_post.id))[0]
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/db/models/query.py", line 446, in __getitem__
+    return qs._result_cache[0]
+IndexError: list index out of range
+2022-11-17 15:17:26,402 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py "GET /news/71/ HTTP/1.1" 500 95401 None
+2022-11-17 15:19:29,846 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/utils/log.py Internal Server Error: /articles/create/ (<class 'project.models.Author.MultipleObjectsReturned'>, MultipleObjectsReturned('get() returned more than one Author -- it returned 2!'), <traceback object at 0x111147c40>)
+Traceback (most recent call last):
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/contrib/auth/mixins.py", line 109, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 142, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/edit.py", line 184, in post
+    return super().post(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/edit.py", line 153, in post
+    return self.form_valid(form)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/news/project/views.py", line 160, in form_valid
+    post.author = Author.objects.get(user=self.request.user)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/db/models/query.py", line 653, in get
+    raise self.model.MultipleObjectsReturned(
+project.models.Author.MultipleObjectsReturned: get() returned more than one Author -- it returned 2!
+2022-11-17 15:19:36,113 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py "POST /articles/create/ HTTP/1.1" 500 102409 None
+2022-11-17 15:22:06,122 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/utils/log.py Internal Server Error: /news/create/ (<class 'project.models.Author.MultipleObjectsReturned'>, MultipleObjectsReturned('get() returned more than one Author -- it returned 2!'), <traceback object at 0x1111b5900>)
+Traceback (most recent call last):
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/contrib/auth/mixins.py", line 109, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 142, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/edit.py", line 184, in post
+    return super().post(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/edit.py", line 153, in post
+    return self.form_valid(form)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/news/project/views.py", line 147, in form_valid
+    post.author = Author.objects.get(user=self.request.user)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/db/models/query.py", line 653, in get
+    raise self.model.MultipleObjectsReturned(
+project.models.Author.MultipleObjectsReturned: get() returned more than one Author -- it returned 2!
+2022-11-17 15:22:06,237 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py "POST /news/create/ HTTP/1.1" 500 102259 None

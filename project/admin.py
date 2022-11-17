@@ -1,10 +1,13 @@
 from django.contrib import admin
 
 from .models import Author, Post, Category, CategoryUser, Comment, PostCategory
+from modeltranslation.admin import TranslationAdmin # импортируем модель амдинки
+# (вспоминаем модуль про переопределение стандартных админ-инструментов)
 
 
 # создаём новый класс для представления постов в админке
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(TranslationAdmin, admin.ModelAdmin):
+    model = Post
     # list_display — это список или кортеж со всеми полями, которые вы хотите видеть в таблице
     # с товарами в админке
     # list_display = [field.name for field in Post._meta.get_fields()]  # генерируем список имён
@@ -18,7 +21,12 @@ class PostAdmin(admin.ModelAdmin):
     # совпадения параметры, которые вы укажите в поле search_fields
 
 
+class CategoryAdmin(TranslationAdmin):
+    model = Category
+
+
 class AuthorAdmin(admin.ModelAdmin):
+    model = Author
     list_display = ('user', 'user_rating')
     list_filter = ('user', 'user_rating')
     search_fields = ('user', 'user_rating')

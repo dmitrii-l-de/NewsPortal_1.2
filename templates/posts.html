@@ -1,5 +1,7 @@
 {% extends 'default.html' %}
 
+{% load i18n %} <!-- Загружаем теги с переводами, без этой строки ничего не будет работать -->
+
 {% load custom_tags %}
 
 {% load custom_filters %}
@@ -15,24 +17,29 @@ Post
 {% cache 5 title %}
 
 {% block content %}
-    <h1>Свежих новостей: {{ posts_list|length }} </h1>
-    <h6>Поиск статьи</h6>
+
+
+    {% trans "Check out my new cool translation" %}! <!-- Переводим строку -->
+
+    <h1>{% trans 'Latest News' %}: {{ posts_list|length }} </h1>
+    <h6>{% trans 'Article/News search' %}</h6>
     {# Добавляем форму, которая объединяет набор полей, которые будут отправляться в запросе #}
    <form action="" method="get">
        {# Переменная, которую мы передали через контекст, может сгенерировать нам форму с полями #}
        {{ filterset.form.as_p }}
        {# Добавим кнопку отправки данных формы #}
-       <input type="submit" value="Найти" />
+       <input type="submit" value="{% trans 'Search' %}" />
    </form>
+
     <hr>
        {% if posts_list %}
             <table class="table table-hover">
       <thead>
         <tr class="table-dark">
 
-          <td>Заголовок</td>
-          <td>Дата публикации</td>
-          <td>Текст статьи</td>
+          <td>{% trans 'Title '%}</td>
+          <td>{% trans 'Publication date' %}</td>
+          <td>{% trans 'Text' %}</td>
         </tr>
 
                {% for post in posts_list %}
@@ -48,7 +55,7 @@ Post
         </table>
 
     {% else %}
-       <h2>К сожалению больше новостей нет!</h2>
+       <h2>{% trans 'Unfortunately no more News and Articles' %}!</h2>
     {% endif %}
     {% if page_obj.has_previous %}
         <a href="?{% url_replace page=1 %}">1</a>
@@ -67,6 +74,7 @@ Post
             <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
         {% endif %}
     {% endif %}
+
 {% endblock content %}
 
 {% endcache %}

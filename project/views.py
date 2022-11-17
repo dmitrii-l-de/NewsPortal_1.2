@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMix
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
@@ -13,10 +14,16 @@ from .forms import PostForm, UserForm
 from .models import Post, Author, PostCategory, CategoryUser
 from .filters import PostFilter
 from django.core.cache import cache # импортируем наш кэш
+from django.utils.translation import gettext as _ # импортируем функцию для перевода
 
 
 class BaseView(TemplateView):
     template_name = 'default.html'
+
+    # реализация вывода переведенного текста
+    # def get(self, request):
+    #     string = _('Hello World')
+    #     return HttpResponse(string)
 
 
 class PostList(ListView):
@@ -35,7 +42,7 @@ class PostList(ListView):
     # Это имя списка, в котором будут лежать все объекты.
     # Его надо указать, чтобы обратиться к списку объектов в html-шаблоне.
     context_object_name = 'posts_list'
-    paginate_by = 2
+    paginate_by = 3
 
     # Переопределяем функцию получения списка новостей
     def get_queryset(self):
@@ -55,6 +62,14 @@ class PostList(ListView):
         # Добавляем в контекст объект фильтрации.
         context['filterset'] = self.filterset
         return context
+
+    # def get(self, request):
+    #     # . Translators: This message appears on the home page only
+    #     models = Post.objects.all()
+    #     context = {
+    #         'models': models,
+    #     }
+    #     return HttpResponse(render(request, 'posts.html', context))
 
 
 class PostDetail(DetailView):

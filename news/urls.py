@@ -22,9 +22,10 @@ from project.views import (BaseView, PostList, PostDetail, NewsCreate, ArticlesC
 from django.views.decorators.cache import cache_page
 
 urlpatterns = [
+    path('i18n/', include('django.conf.urls.i18n')), # подключаем встроенные эндопинты для
+    # работы с локализацией(переводом)
     path('admin/', admin.site.urls),
     path('', BaseView.as_view()),
-    # path('', IndexView.as_view()),
     path('news/', cache_page(60)(PostList.as_view()), name='posts_list'), #указываем name для обращения к ссылке в шаблоне
     path('news/<int:pk>/', PostDetail.as_view(), name='post_detail'),
     path('news/create/', NewsCreate.as_view(), name='news_create'),

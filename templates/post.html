@@ -1,23 +1,25 @@
 {% extends 'default.html' %}
-
+{% load i18n %}
 {% load custom_filters %}
 
 {% block title %}
-Post
+{% trans 'Post' %}
 {% endblock title %}
 
 <!-- В контенте на странице мы выводим сам товар, идентификатор которого был передан в url -->
 {% block content %}
-<h1>Свежая новость от {{ post_detail.pub_date | date:'d M Y' }}</h1>
+
+
+<h1>{% trans 'Latest news at' %} {{ post_detail.pub_date | date:'d M Y' }}</h1>
     <hr>
        {% if post_detail %}
             <table class="table table-hover">
       <thead>
         <tr class="table-dark">
 
-          <td>Заголовок</td>
-          <td>Дата публикации</td>
-          <td>Текст статьи</td>
+          <td>{% trans 'Title' %}</td>
+          <td>{% trans 'Publication date' %}</td>
+          <td>{% trans 'Post text' %}</td>
         </tr>
        <tr>
            <td>{{ post_detail.title | censor }}</td>
@@ -30,7 +32,7 @@ Post
                        {% csrf_token %}
                        {% if is_not_subscribe %}
                        <button type="button" class="btn btn-dark">
-                       <a class="nav-link" href="/subscribe_me/?query={{post_detail.pk}}">Подписаться на {{cat}}</a>
+                       <a class="nav-link" href="/subscribe_me/?query={{post_detail.pk}}">{% trans 'Subscribe to' %} {{cat}}</a>
                        </button>
                        {% endif %}
                        {% if not is_not_subscribe %}
@@ -45,12 +47,12 @@ Post
 
        </table>
                 <button type="button" class="btn btn-dark">
-               <a class="nav-link" href="update/">Внести изменения в статью/новость</a>
+               <a class="nav-link" href="update/">{% trans 'Make changes to the article/news' %}</a>
                </button>
                 <button type="button" class="btn btn-dark">
-               <a class="nav-link" href="delete/">Удалить статью/новость</a>
+               <a class="nav-link" href="delete/">{% trans 'Delete Article/News' %}</a>
                </button>
    {% else %}
-       <h2>К сожалению больше новостей нет!</h2>
+       <h2>{% trans 'Unfortunately no more news' %}!</h2>
    {% endif %}
 {% endblock content %}
