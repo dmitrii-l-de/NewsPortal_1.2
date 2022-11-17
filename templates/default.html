@@ -1,8 +1,17 @@
 <!DOCTYPE html>
 {% load i18n %}
+{% load tz %}
 {% load static %}
-<html>
+
+<html lang="en">
+<!-- Если сейчас больше чем 19 или же меньше 7, то выводим тёмную тему, иначе выводим светлую -->
+    <style>
+        body {background-color: {% if current_time.hour >= 19 or current_time.hour <= 7 %} darkcyan {% else %} powderblue {% endif %};}
+    </style>
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}{% trans 'Main Page' %}{% endblock title %}</title>
     <link href="{% static 'bootstrap-5.2.2-dist/css/bootstrap.min.css' %}" rel="stylesheet" />
 </head>
@@ -60,8 +69,25 @@
                 </option>
             {% endfor %}
         </select>
-        <input type="submit" value="set">
+        <input type="submit" value="{% trans 'set' %}">
     </form>
+
+    {% get_current_timezone as TIME_ZONE %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="timezone">{% trans 'Time zone' %}:</label>
+        <select name="timezone">
+            {% for tz in timezones %}
+            <option value="{{ tz }}"{% if tz == TIME_ZONE %} selected{% endif %}>{{ tz }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="{% trans 'Set' %}">
+    </form>
+
+    {{ TIME_ZONE }}
+    {{ current_time|timezone:TIME_ZONE }} <!-- Отображаем время в выбранном часовом поясе  -->
+
+
 
     <div class="container">{% block content %}{% trans 'Main Page' %}{% endblock content %}</div>
 

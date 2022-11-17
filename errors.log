@@ -331,3 +331,73 @@ Traceback (most recent call last):
     raise self.model.MultipleObjectsReturned(
 project.models.Author.MultipleObjectsReturned: get() returned more than one Author -- it returned 2!
 2022-11-17 15:22:06,237 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py "POST /news/create/ HTTP/1.1" 500 102259 None
+2022-11-17 16:41:02,791 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/utils/log.py Internal Server Error: /news/ (<class 'NameError'>, NameError("name 'timezone' is not defined"), <traceback object at 0x110fdc500>)
+Traceback (most recent call last):
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 133, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 142, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/news/project/views.py", line 64, in get
+    curent_time = timezone.now()
+NameError: name 'timezone' is not defined
+2022-11-17 16:41:02,823 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py "GET /news/ HTTP/1.1" 500 78581 None
+2022-11-17 16:42:03,849 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/utils/log.py Internal Server Error: /news/ (<class 'NameError'>, NameError("name 'timezone' is not defined"), <traceback object at 0x111172340>)
+Traceback (most recent call last):
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 133, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 142, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/news/project/views.py", line 64, in get
+    curent_time = timezone.now()
+NameError: name 'timezone' is not defined
+2022-11-17 16:42:03,864 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py "GET /news/ HTTP/1.1" 500 78581 None
+2022-11-17 16:45:21,265 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/utils/log.py Internal Server Error: /news/ (<class 'NameError'>, NameError("name 'MyModel' is not defined"), <traceback object at 0x10ab8c500>)
+Traceback (most recent call last):
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 133, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 142, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/news/project/views.py", line 72, in get
+    models = MyModel.objects.all()
+NameError: name 'MyModel' is not defined
+2022-11-17 16:45:21,291 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py "GET /news/ HTTP/1.1" 500 78855 None
+2022-11-17 16:45:56,517 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/utils/log.py Internal Server Error: /news/ (<class 'django.template.exceptions.TemplateDoesNotExist'>, TemplateDoesNotExist('index.html'), <traceback object at 0x1105be400>)
+Traceback (most recent call last):
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 133, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 142, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/news/project/views.py", line 80, in get
+    return HttpResponse(render(request, 'index.html', context))
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: index.html
+2022-11-17 16:45:56,598 ERROR /Users/dima/Downloads/PyCharm projects/NewsPaper1/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py "GET /news/ HTTP/1.1" 500 112184 None

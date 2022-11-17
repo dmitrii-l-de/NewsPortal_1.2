@@ -18,11 +18,8 @@ Post
 
 {% block content %}
 
-
-    {% trans "Check out my new cool translation" %}! <!-- Переводим строку -->
-
     <h1>{% trans 'Latest News' %}: {{ posts_list|length }} </h1>
-    <h6>{% trans 'Article/News search' %}</h6>
+    <h5>{% trans 'Articles/News search' %}</h5>
     {# Добавляем форму, которая объединяет набор полей, которые будут отправляться в запросе #}
    <form action="" method="get">
        {# Переменная, которую мы передали через контекст, может сгенерировать нам форму с полями #}

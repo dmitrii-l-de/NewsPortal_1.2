@@ -19,15 +19,15 @@ def post_save_mail(sender, instance, action="post_add", *args, **kwargs, ):
         send_new_post_mail(instance.id)
 
 
-# @receiver(pre_save, sender=Post)
-# # Здесь реализована функция запрета публикации более 3 постов в день
-# def check_daily_rate(sender, instance, **kwargs):
-#     post_count = Post.objects.filter(
-#         author=instance.author,
-#         pub_date__gte=datetime.now() - timedelta(days=1),
-#     ).count()
-#     if post_count > 3:
-#         raise PermissionDenied("Вы не можете публиковать более 3 постов в день")
+@receiver(pre_save, sender=Post)
+# Здесь реализована функция запрета публикации более 3 постов в день
+def check_daily_rate(sender, instance, **kwargs):
+    post_count = Post.objects.filter(
+        author=instance.author,
+        pub_date__gte=datetime.now() - timedelta(days=1),
+    ).count()
+    if post_count > 3:
+        raise PermissionDenied("Вы не можете публиковать более 3 постов в день")
 
 
 @receiver(post_delete, sender=Post)

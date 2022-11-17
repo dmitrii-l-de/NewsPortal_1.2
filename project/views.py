@@ -14,16 +14,35 @@ from .forms import PostForm, UserForm
 from .models import Post, Author, PostCategory, CategoryUser
 from .filters import PostFilter
 from django.core.cache import cache # импортируем наш кэш
-from django.utils.translation import gettext as _ # импортируем функцию для перевода
+
+from django.utils import timezone
+
+import pytz  # импортируем стандартный модуль для работы с часовыми поясами
 
 
 class BaseView(TemplateView):
     template_name = 'default.html'
 
-    # реализация вывода переведенного текста
-    # def get(self, request):
-    #     string = _('Hello World')
-    #     return HttpResponse(string)
+    def get(self, request):
+        current_time = timezone.now()
+
+        # .  Translators: This message appears on the home page only
+        models = Post.objects.all()
+
+        context = {
+            'models': models,
+            'current_time': current_time,
+            'timezones': pytz.common_timezones  # добавляем в контекст все доступные часовые пояса
+        }
+
+        return HttpResponse(render(request, 'default.html', context))
+
+    #  по пост-запросу будем добавлять в сессию часовой пояс, который и будет обрабатываться написанным нами ранее middleware
+    def post(self, request):
+        request.session['django_timezone'] = request.POST['timezone']
+        return redirect('/')
+
+
 
 
 class PostList(ListView):

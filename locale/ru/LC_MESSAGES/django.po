@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-17 15:47+0000\n"
+"POT-Creation-Date: 2022-11-17 17:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "Author"
 msgstr "Автор"
 
-#: project/models.py:83 templates/post.html:21 templates/posts.html:41
+#: project/models.py:83 templates/post.html:21 templates/posts.html:38
 #: templates/search.html:23 templates/user_detail.html:21
 msgid "Publication date"
 msgstr "Дата публикации"
@@ -50,33 +50,44 @@ msgstr "Создать новый пост"
 msgid "Save"
 msgstr "Сохранить"
 
-#: templates/default.html:6 templates/default.html:66
+#: templates/default.html:15 templates/default.html:92
 msgid "Main Page"
 msgstr "Главная страница"
 
-#: templates/default.html:19
+#: templates/default.html:28
 msgid "All News"
 msgstr "Все новости"
 
-#: templates/default.html:24
+#: templates/default.html:33
 msgid "Create Post"
 msgstr "Создать пост"
 
-#: templates/default.html:27 templates/news_create.html:5
+#: templates/default.html:36 templates/news_create.html:5
 msgid "Create News"
 msgstr "Создать новость"
 
-#: templates/default.html:30
+#: templates/default.html:39
 msgid "Profile"
 msgstr "Профиль"
 
-#: templates/default.html:45 templates/posts.html:31 templates/search.html:16
+#: templates/default.html:54 templates/posts.html:28 templates/search.html:16
 msgid "Search"
 msgstr "Поиск"
 
+#: templates/default.html:72
+
+msgid "set"
+msgstr "Установить"
+
+#: templates/default.html:78
+msgid "Time zone"
+msgstr "Часовой пояс"
+
+#: templates/default.html:84
+msgid "Set"
+msgstr "Установить"
+
 #: templates/post.html:6
-#, fuzzy
-#| msgid "Post text"
 msgid "Post"
 msgstr "Текст поста"
 
@@ -85,8 +96,6 @@ msgid "Latest news at"
 msgstr "Последние новости от"
 
 #: templates/post.html:20 templates/search.html:22
-#, fuzzy
-#| msgid "Title "
 msgid "Title"
 msgstr "Заголовок"
 
@@ -103,8 +112,6 @@ msgid "Delete Article/News"
 msgstr "Удалить Статью/Новость"
 
 #: templates/post.html:56
-#, fuzzy
-#| msgid "Unfortunately no more News and Articles"
 msgid "Unfortunately no more news"
 msgstr "К сожалению больше нет Новостей и Статей"
 
@@ -124,28 +131,23 @@ msgstr "Удалить"
 msgid "Update News"
 msgstr "Обновить Новость"
 
-#: templates/posts.html:22
-msgid "Check out my new cool translation"
-msgstr "Зацени мой классный перевод"
-
-#: templates/posts.html:24
+#: templates/posts.html:21
 msgid "Latest News"
 msgstr "Последние новости"
 
-#: templates/posts.html:25
-#, fuzzy
-msgid "Article/News search"
+#: templates/posts.html:22
+msgid "Articles/News search"
 msgstr "Искать Статью/Новость"
 
-#: templates/posts.html:40
+#: templates/posts.html:37
 msgid "Title "
 msgstr "Заголовок"
 
-#: templates/posts.html:42 templates/search.html:24
+#: templates/posts.html:39 templates/search.html:24
 msgid "Text"
 msgstr "Текст"
 
-#: templates/posts.html:58
+#: templates/posts.html:55
 msgid "Unfortunately no more News and Articles"
 msgstr "К сожалению больше нет Новостей и Статей"
 
@@ -208,6 +210,9 @@ msgstr "Выход"
 #: templates/user_update.html:5
 msgid "Change Author"
 msgstr "Изменить автора"
+
+#~ msgid "Check out my new cool translation"
+#~ msgstr "Зацени мой классный перевод"
 
 #~ msgid "Rating"
 #~ msgstr "Рейтинг"
